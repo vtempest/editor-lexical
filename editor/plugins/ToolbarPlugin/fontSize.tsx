@@ -1,16 +1,10 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import './fontSize.css';
 
 import {LexicalEditor} from 'lexical';
 import * as React from 'react';
 
+import Icon from '../../ui/Icon';
 import {
   MAX_ALLOWED_FONT_SIZE,
   MIN_ALLOWED_FONT_SIZE,
@@ -150,7 +144,7 @@ export default function FontSize({
         className="toolbar-item font-decrement"
         aria-label="Decrease font size"
         title={`Decrease font size (${SHORTCUTS.DECREASE_FONT_SIZE})`}>
-        <i className="format minus-icon" />
+        <Icon name="minus-sign" />
       </button>
 
       <input
@@ -185,7 +179,7 @@ export default function FontSize({
         className="toolbar-item font-increment"
         aria-label="Increase font size"
         title={`Increase font size (${SHORTCUTS.INCREASE_FONT_SIZE})`}>
-        <i className="format add-icon" />
+        <Icon name="add-sign" />
       </button>
     </>
   );

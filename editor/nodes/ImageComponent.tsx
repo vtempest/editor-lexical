@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {LexicalCommand, LexicalEditor, NodeKey} from 'lexical';
 import type {JSX} from 'react';
@@ -49,10 +42,10 @@ import {
   useState,
 } from 'react';
 
-import {createWebsocketProvider} from '../collaboration';
+import {createWebsocketProvider} from '../collab/collaboration';
 import {useSettings} from '../context/SettingsContext';
 import {useSharedHistoryContext} from '../context/SharedHistoryContext';
-import brokenImage from '../images/image-broken.svg';
+import brokenImage from '../icons/editor/image-broken.svg';
 import EmojisPlugin from '../plugins/EmojisPlugin';
 import KeywordsPlugin from '../plugins/KeywordsPlugin';
 import LinkPlugin from '../plugins/LinkPlugin';

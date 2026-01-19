@@ -1,10 +1,31 @@
 {
-  "name": "lexical-editor",
+  "name": "lexical-editor-toolbar",
+  "description": "Formatted Text Editor toolbar for formatting, media, tables",
   "version": "0.39.0",
+  "author": "vtempest",
+  "license": "MIT",
   "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "dev": "vite --host --port 3000",
-    "build-dev": "vite build && vite preview --port 4000 --host"
+    "build": "vite build",
+    "build-dev": "vite build && vite preview"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.0",
@@ -36,6 +57,8 @@
     "lexical": "0.39.0",
     "lodash-es": "^4.17.22",
     "lucide-react": "^0.562.0",
+    "mammoth": "^1.11.0",
+    "marked": "^17.0.1",
     "prettier": "^3.7.4",
     "react": "^19.2.3",
     "react-day-picker": "^9.13.0",
@@ -58,6 +81,5 @@
     "terser": "^5.44.1",
     "vite": "^7.3.0",
     "vite-plugin-static-copy": "^3.1.4"
-  },
-  "sideEffects": false
+  }
 }

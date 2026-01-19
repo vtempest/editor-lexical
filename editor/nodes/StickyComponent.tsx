@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {LexicalEditor, NodeKey} from 'lexical';
 import type {JSX} from 'react';
@@ -23,10 +16,11 @@ import {$getNodeByKey} from 'lexical';
 import * as React from 'react';
 import {useEffect, useLayoutEffect, useRef} from 'react';
 
-import {createWebsocketProvider} from '../collaboration';
+import {createWebsocketProvider} from '../collab/collaboration';
 import {useSharedHistoryContext} from '../context/SharedHistoryContext';
 import StickyEditorTheme from '../themes/StickyEditorTheme';
 import ContentEditable from '../ui/ContentEditable';
+import Icon from '../ui/Icon';
 import {$isStickyNode} from './StickyNode';
 
 type Positioning = {
@@ -237,7 +231,7 @@ export default function StickyComponent({
           className="color"
           aria-label="Change sticky note color"
           title="Color">
-          <i className="bucket" />
+          <Icon name="paint-bucket" />
         </button>
         <LexicalNestedComposer
           initialEditor={caption}

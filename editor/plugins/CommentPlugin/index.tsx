@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {Provider} from '@lexical/yjs';
 import type {
@@ -77,6 +70,7 @@ import useModal from '../../hooks/useModal';
 import CommentEditorTheme from '../../themes/CommentEditorTheme';
 import Button from '../../ui/Button';
 import ContentEditable from '../../ui/ContentEditable';
+import Icon from '../../ui/Icon';
 
 export const INSERT_INLINE_COMMAND: LexicalCommand<void> = createCommand(
   'INSERT_INLINE_COMMAND',
@@ -123,7 +117,7 @@ function AddCommentBox({
       <button
         className="CommentPlugin_AddCommentBox_button"
         onClick={onAddComment}>
-        <i className="icon add-comment" />
+        <Icon name="add-comment" />
       </button>
     </div>
   );

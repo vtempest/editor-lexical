@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {JSX} from 'react';
 
@@ -34,6 +27,7 @@ import {getDOMRangeRect} from '../../utils/getDOMRangeRect';
 import {getSelectedNode} from '../../utils/getSelectedNode';
 import {setFloatingElemPosition} from '../../utils/setFloatingElemPosition';
 import ColorPicker from '../../ui/ColorPicker';
+import Icon from '../../ui/Icon';
 import {INSERT_INLINE_COMMAND} from '../CommentPlugin';
 
 function TextFormatFloatingToolbar({
@@ -227,7 +221,7 @@ function TextFormatFloatingToolbar({
             className={'popup-item spaced ' + (isBold ? 'active' : '')}
             title="Bold"
             aria-label="Format text as bold">
-            <i className="format bold" />
+            <Icon name="bold" />
           </button>
           <button
             type="button"
@@ -237,7 +231,7 @@ function TextFormatFloatingToolbar({
             className={'popup-item spaced ' + (isItalic ? 'active' : '')}
             title="Italic"
             aria-label="Format text as italics">
-            <i className="format italic" />
+            <Icon name="italic" />
           </button>
           <button
             type="button"
@@ -247,7 +241,7 @@ function TextFormatFloatingToolbar({
             className={'popup-item spaced ' + (isUnderline ? 'active' : '')}
             title="Underline"
             aria-label="Format text to underlined">
-            <i className="format underline" />
+            <Icon name="underline" />
           </button>
           <button
             type="button"
@@ -257,7 +251,7 @@ function TextFormatFloatingToolbar({
             className={'popup-item spaced ' + (isStrikethrough ? 'active' : '')}
             title="Strikethrough"
             aria-label="Format text with a strikethrough">
-            <i className="format strikethrough" />
+            <Icon name="strikethrough" />
           </button>
 
           <button
@@ -266,7 +260,7 @@ function TextFormatFloatingToolbar({
             className={'popup-item spaced ' + (isLink ? 'active' : '')}
             title="Insert link"
             aria-label="Insert link">
-            <i className="format link" />
+            <Icon name="link" />
           </button>
           
           <div className="popup-item split-button-container">
@@ -276,7 +270,7 @@ function TextFormatFloatingToolbar({
               className="popup-item spaced main-button"
               title="Highlight"
               aria-label="Format text with a highlight">
-              <i className="format highlight" style={{borderBottom: `2px solid ${highlightColor}`}} />
+              <Icon name="highlighter" style={{borderBottom: `2px solid ${highlightColor}`}} />
             </button>
             <button
               type="button"
@@ -284,7 +278,7 @@ function TextFormatFloatingToolbar({
               className="popup-item chevron-button"
               title="Highlight Color"
               aria-label="Select highlight color">
-              <i className="chevron-down" />
+              <Icon name="chevron-down" />
             </button>
             {isHighlightColorPickerOpen && (
               <div className="color-picker-popover">
@@ -303,7 +297,7 @@ function TextFormatFloatingToolbar({
         className={'popup-item spaced insert-comment'}
         title="Insert comment"
         aria-label="Insert comment">
-        <i className="format add-comment" />
+        <Icon name="chat-left-text" />
       </button>
     </div>
   );

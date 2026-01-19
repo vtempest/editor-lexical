@@ -1,0 +1,1 @@
+import{C as a,N as e}from"./chunk-EIO257PC-CVCNKWcc.js";import"./editor-Dv-3TiYC.js";var t=import.meta.url?new URL(import.meta.url):void 0;typeof window>"u"&&typeof self<"u"&&(self.onmessage=async t=>{if(t.data.command===a.Subset){let a=await e(t.data.arrayBuffer,t.data.codePoints);self.postMessage(a,{transfer:[a]})}});export{t as WorkerUrl};

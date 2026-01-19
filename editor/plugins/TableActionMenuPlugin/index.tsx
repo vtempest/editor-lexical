@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {ElementNode, LexicalEditor} from 'lexical';
 import type {JSX} from 'react';
@@ -52,6 +45,7 @@ import {createPortal} from 'react-dom';
 import useModal from '../../hooks/useModal';
 import ColorPicker from '../../ui/ColorPicker';
 import DropDown, {DropDownItem} from '../../ui/DropDown';
+import Icon from '../../ui/Icon';
 
 function computeSelectionCount(selection: TableSelection): {
   columns: number;
@@ -535,7 +529,7 @@ function TableActionMenu({
           }}
           className="item wide">
           <div className="icon-text-container">
-            <i className="icon vertical-top" />
+            <Icon name="vertical-top" />
             <span className="text">Top Align</span>
           </div>
         </DropDownItem>
@@ -545,7 +539,7 @@ function TableActionMenu({
           }}
           className="item wide">
           <div className="icon-text-container">
-            <i className="icon vertical-middle" />
+            <Icon name="vertical-middle" />
             <span className="text">Middle Align</span>
           </div>
         </DropDownItem>
@@ -555,7 +549,7 @@ function TableActionMenu({
           }}
           className="item wide">
           <div className="icon-text-container">
-            <i className="icon vertical-bottom" />
+            <Icon name="vertical-bottom" />
             <span className="text">Bottom Align</span>
           </div>
         </DropDownItem>

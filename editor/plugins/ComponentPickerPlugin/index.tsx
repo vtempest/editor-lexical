@@ -1,14 +1,8 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {JSX} from 'react';
 
 import {$createCodeNode} from '@lexical/code';
+import Icon from '../../ui/Icon';
 import {
   INSERT_CHECK_LIST_COMMAND,
   INSERT_ORDERED_LIST_COMMAND,
@@ -131,7 +125,7 @@ function getDynamicOptions(editor: LexicalEditor, queryString: string) {
       ...colOptions.map(
         (columns) =>
           new ComponentPickerOption(`${rows}x${columns} Table`, {
-            icon: <i className="icon table" />,
+            icon: <Icon name="table" />,
             keywords: ['table'],
             onSelect: () =>
               editor.dispatchCommand(INSERT_TABLE_COMMAND, {columns, rows}),
@@ -148,7 +142,7 @@ type ShowModal = ReturnType<typeof useModal>[1];
 function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
   return [
     new ComponentPickerOption('Paragraph', {
-      icon: <i className="icon paragraph" />,
+      icon: <Icon name="paragraph" />,
       keywords: ['normal', 'paragraph', 'p', 'text'],
       onSelect: () =>
         editor.update(() => {
@@ -161,7 +155,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
     ...([1, 2, 3] as const).map(
       (n) =>
         new ComponentPickerOption(`Heading ${n}`, {
-          icon: <i className={`icon h${n}`} />,
+          icon: <Icon name={`h${n}`} />,
           keywords: ['heading', 'header', `h${n}`],
           onSelect: () =>
             editor.update(() => {
@@ -173,7 +167,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
         }),
     ),
     new ComponentPickerOption('Table', {
-      icon: <i className="icon table" />,
+      icon: <Icon name="table" />,
       keywords: ['table', 'grid', 'spreadsheet', 'rows', 'columns'],
       onSelect: () =>
         showModal('Insert Table', (onClose) => (
@@ -181,25 +175,25 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
         )),
     }),
     new ComponentPickerOption('Numbered List', {
-      icon: <i className="icon number" />,
+      icon: <Icon name="number" />,
       keywords: ['numbered list', 'ordered list', 'ol'],
       onSelect: () =>
         editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined),
     }),
     new ComponentPickerOption('Bulleted List', {
-      icon: <i className="icon bullet" />,
+      icon: <Icon name="bullet" />,
       keywords: ['bulleted list', 'unordered list', 'ul'],
       onSelect: () =>
         editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined),
     }),
     new ComponentPickerOption('Check List', {
-      icon: <i className="icon check" />,
+      icon: <Icon name="check" />,
       keywords: ['check list', 'todo list'],
       onSelect: () =>
         editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined),
     }),
     new ComponentPickerOption('Quote', {
-      icon: <i className="icon quote" />,
+      icon: <Icon name="quote" />,
       keywords: ['block quote'],
       onSelect: () =>
         editor.update(() => {
@@ -210,7 +204,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
         }),
     }),
     new ComponentPickerOption('Code', {
-      icon: <i className="icon code" />,
+      icon: <Icon name="code" />,
       keywords: ['javascript', 'python', 'js', 'codeblock'],
       onSelect: () =>
         editor.update(() => {
@@ -230,24 +224,24 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
         }),
     }),
     new ComponentPickerOption('Divider', {
-      icon: <i className="icon horizontal-rule" />,
+      icon: <Icon name="horizontal-rule" />,
       keywords: ['horizontal rule', 'divider', 'hr'],
       onSelect: () =>
         editor.dispatchCommand(INSERT_HORIZONTAL_RULE_COMMAND, undefined),
     }),
     new ComponentPickerOption('Page Break', {
-      icon: <i className="icon page-break" />,
+      icon: <Icon name="page-break" />,
       keywords: ['page break', 'divider'],
       onSelect: () => editor.dispatchCommand(INSERT_PAGE_BREAK, undefined),
     }),
     new ComponentPickerOption('Excalidraw', {
-      icon: <i className="icon diagram-2" />,
+      icon: <Icon name="diagram-2" />,
       keywords: ['excalidraw', 'diagram', 'drawing'],
       onSelect: () =>
         editor.dispatchCommand(INSERT_EXCALIDRAW_COMMAND, undefined),
     }),
     new ComponentPickerOption('Poll', {
-      icon: <i className="icon poll" />,
+      icon: <Icon name="poll" />,
       keywords: ['poll', 'vote'],
       onSelect: () =>
         showModal('Insert Poll', (onClose) => (
@@ -264,7 +258,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
         }),
     ),
     new ComponentPickerOption('Date', {
-      icon: <i className="icon calendar" />,
+      icon: <Icon name="calendar" />,
       keywords: ['date', 'calendar', 'time'],
       onSelect: () => {
         const dateTime = new Date();
@@ -273,7 +267,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       },
     }),
     new ComponentPickerOption('Today', {
-      icon: <i className="icon calendar" />,
+      icon: <Icon name="calendar" />,
       keywords: ['date', 'calendar', 'time', 'today'],
       onSelect: () => {
         const dateTime = new Date();
@@ -282,7 +276,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       },
     }),
     new ComponentPickerOption('Tomorrow', {
-      icon: <i className="icon calendar" />,
+      icon: <Icon name="calendar" />,
       keywords: ['date', 'calendar', 'time', 'tomorrow'],
       onSelect: () => {
         const dateTime = new Date();
@@ -292,7 +286,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       },
     }),
     new ComponentPickerOption('Yesterday', {
-      icon: <i className="icon calendar" />,
+      icon: <Icon name="calendar" />,
       keywords: ['date', 'calendar', 'time', 'yesterday'],
       onSelect: () => {
         const dateTime = new Date();
@@ -302,7 +296,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       },
     }),
     new ComponentPickerOption('Equation', {
-      icon: <i className="icon equation" />,
+      icon: <Icon name="equation" />,
       keywords: ['equation', 'latex', 'math'],
       onSelect: () =>
         showModal('Insert Equation', (onClose) => (
@@ -310,7 +304,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
         )),
     }),
     new ComponentPickerOption('GIF', {
-      icon: <i className="icon gif" />,
+      icon: <Icon name="gif" />,
       keywords: ['gif', 'animate', 'image', 'file'],
       onSelect: () =>
         showModal('Insert Image', (onClose) => (
@@ -318,7 +312,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
         )),
     }),
     new ComponentPickerOption('Image', {
-      icon: <i className="icon image" />,
+      icon: <Icon name="image" />,
       keywords: ['image', 'photo', 'picture', 'file'],
       onSelect: () =>
         showModal('Insert Image', (onClose) => (
@@ -326,13 +320,13 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
         )),
     }),
     new ComponentPickerOption('Collapsible', {
-      icon: <i className="icon caret-right" />,
+      icon: <Icon name="caret-right" />,
       keywords: ['collapse', 'collapsible', 'toggle'],
       onSelect: () =>
         editor.dispatchCommand(INSERT_COLLAPSIBLE_COMMAND, undefined),
     }),
     new ComponentPickerOption('Columns Layout', {
-      icon: <i className="icon columns" />,
+      icon: <Icon name="columns" />,
       keywords: ['columns', 'layout', 'grid'],
       onSelect: () =>
         showModal('Insert Columns Layout', (onClose) => (
@@ -342,7 +336,7 @@ function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
     ...(['left', 'center', 'right', 'justify'] as const).map(
       (alignment) =>
         new ComponentPickerOption(`Align ${alignment}`, {
-          icon: <i className={`icon ${alignment}-align`} />,
+          icon: <Icon name={`${alignment}-align`} />,
           keywords: ['align', 'justify', alignment],
           onSelect: () =>
             editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, alignment),

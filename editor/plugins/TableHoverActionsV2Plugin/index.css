@@ -1,13 +1,6 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 .floating-add-indicator {
-  background-image: url(../../images/icons/plus.svg);
+  background-image: url(../../icons/editor/plus.svg);
   background-color: #ffffff;
   background-position: center;
   background-repeat: no-repeat;
@@ -25,7 +18,7 @@
 }
 
 .floating-filter-indicator {
-  background-image: url(../../images/icons/filter-left.svg);
+  background-image: url(../../icons/editor/filter-left.svg);
   background-color: #ffffff;
   background-position: center;
   background-repeat: no-repeat;

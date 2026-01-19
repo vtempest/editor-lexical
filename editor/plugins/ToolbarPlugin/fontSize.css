@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 .font-size-input {
   font-weight: bold;
@@ -35,13 +28,13 @@ input[type='number'] {
 }
 
 .add-icon {
-  background-image: url(../../images/icons/add-sign.svg);
+  background-image: url(../../icons/editor/add-sign.svg);
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .minus-icon {
-  background-image: url(../../images/icons/minus-sign.svg);
+  background-image: url(../../icons/editor/minus-sign.svg);
   background-repeat: no-repeat;
   background-position: center;
 }

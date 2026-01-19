@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {LexicalEditor} from 'lexical';
 import type {JSX} from 'react';
@@ -13,7 +6,6 @@ import {$createCodeNode, $isCodeNode} from '@lexical/code';
 import {
   editorStateFromSerializedDocument,
   exportFile,
-  importFile,
   SerializedDocument,
   serializedDocumentFromEditorState,
 } from '@lexical/file';
@@ -27,6 +19,7 @@ import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {mergeRegister} from '@lexical/utils';
 import {CONNECTED_COMMAND, TOGGLE_CONNECT_COMMAND} from '@lexical/yjs';
 import {
+  $createParagraphNode,
   $createTextNode,
   $getRoot,
   $isParagraphNode,
@@ -45,8 +38,10 @@ import useFlashMessage from '../../hooks/useFlashMessage';
 import useModal from '../../hooks/useModal';
 import Button from '../../ui/Button';
 import DropDown, {DropDownItem} from '../../ui/DropDown';
+import Icon from '../../ui/Icon';
 import {docFromHash, docToHash} from '../../utils/docSerialization';
 import {PLAYGROUND_TRANSFORMERS} from '../MarkdownTransformers';
+import mammoth from 'mammoth';
 import {
   SPEECH_TO_TEXT_COMMAND,
   SUPPORT_SPEECH_RECOGNITION,
@@ -97,6 +92,94 @@ async function shareDoc(doc: SerializedDocument): Promise<void> {
   const newUrl = url.toString();
   window.history.replaceState({}, '', newUrl);
   await window.navigator.clipboard.writeText(newUrl);
+}
+
+async function importDocxFile(editor: LexicalEditor, file: File): Promise<void> {
+  const arrayBuffer = await file.arrayBuffer();
+  const result = await mammoth.convertToHtml({arrayBuffer});
+  const html = result.value;
+
+  editor.update(() => {
+    const root = $getRoot();
+    root.clear();
+
+    // Create a temporary div to parse HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const textContent = doc.body.textContent || '';
+
+    // Split by paragraphs and create paragraph nodes
+    const lines = textContent.split('\n').filter(line => line.trim());
+
+    if (lines.length === 0) {
+      // If no content, create an empty paragraph
+      const paragraph = $createParagraphNode();
+      root.append(paragraph);
+    } else {
+      lines.forEach(line => {
+        if (line.trim()) {
+          const paragraph = $createParagraphNode();
+          paragraph.append($createTextNode(line));
+          root.append(paragraph);
+        }
+      });
+    }
+  });
+}
+
+async function importMarkdownFile(
+  editor: LexicalEditor,
+  file: File,
+  shouldPreserveNewLines: boolean,
+): Promise<void> {
+  const text = await file.text();
+  editor.update(() => {
+    $convertFromMarkdownString(
+      text,
+      PLAYGROUND_TRANSFORMERS,
+      undefined,
+      shouldPreserveNewLines,
+    );
+  });
+}
+
+async function importCustomFile(
+  editor: LexicalEditor,
+  shouldPreserveNewLines: boolean,
+): Promise<void> {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.docx,.md,.markdown,.json';
+
+  input.onchange = async (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    const file = target.files?.[0];
+    if (!file) return;
+
+    const fileName = file.name.toLowerCase();
+
+    if (fileName.endsWith('.docx')) {
+      await importDocxFile(editor, file);
+    } else if (fileName.endsWith('.md') || fileName.endsWith('.markdown')) {
+      await importMarkdownFile(editor, file, shouldPreserveNewLines);
+    } else if (fileName.endsWith('.json')) {
+      // Use the original importFile from @lexical/file
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const content = event.target?.result as string;
+        try {
+          const json = JSON.parse(content);
+          const editorState = editorStateFromSerializedDocument(editor, json);
+          editor.setEditorState(editorState);
+        } catch (error) {
+          console.error('Failed to import JSON:', error);
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  input.click();
 }
 
 export default function ActionsPlugin({
@@ -221,15 +304,15 @@ export default function ActionsPlugin({
           aria-label={`${
             isSpeechToText ? 'Enable' : 'Disable'
           } speech to text`}>
-          <i className="mic" />
+          <Icon name="mic" />
         </button>
       )}
       <button
         className="action-button import"
-        onClick={() => importFile(editor)}
+        onClick={() => importCustomFile(editor, shouldPreserveNewLinesInMarkdown)}
         title="Import"
-        aria-label="Import editor state from JSON">
-        <i className="import" />
+        aria-label="Import DOCX, Markdown, or JSON file">
+        <Icon name="upload" />
       </button>
 
       <DropDown
@@ -348,7 +431,7 @@ export default function ActionsPlugin({
         }
         title="Share"
         aria-label="Share Playground link to current editor state">
-        <i className="share" />
+        <Icon name="send" />
       </button>
 
       <button
@@ -356,7 +439,7 @@ export default function ActionsPlugin({
         onClick={handleMarkdownToggle}
         title="Convert From Markdown"
         aria-label="Convert from markdown">
-        <i className="markdown" />
+        <Icon name="markdown" />
       </button>
       <button
         className={`action-button ${showTableOfContents ? 'active' : ''}`}
@@ -381,7 +464,7 @@ export default function ActionsPlugin({
             aria-label={`${
               connected ? 'Disconnect from' : 'Connect to'
             } a collaborative editing server`}>
-            <i className={connected ? 'disconnect' : 'connect'} />
+            <Icon name={connected ? 'plug' : 'plug-fill'} />
           </button>
           {useCollabV2 && (
             <button
@@ -389,7 +472,7 @@ export default function ActionsPlugin({
               onClick={() => {
                 editor.dispatchCommand(SHOW_VERSIONS_COMMAND, undefined);
               }}>
-              <i className="versions" />
+              <Icon name="clock" />
             </button>
           )}
         </>

@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {JSX} from 'react';
 
@@ -21,6 +14,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import {$createMentionNode} from '../../nodes/MentionNode';
+import Icon from '../../ui/Icon';
 
 const PUNCTUATION =
   '\\.,\\+\\*\\?\\$\\@\\|#{}\\(\\)\\^\\-\\[\\]\\\\/!%\'"~=<>_:;';
@@ -623,7 +617,7 @@ export default function NewMentionsPlugin(): JSX.Element | null {
       results
         .map(
           (result) =>
-            new MentionTypeaheadOption(result, <i className="icon user" />),
+            new MentionTypeaheadOption(result, <Icon name="user" />),
         )
         .slice(0, SUGGESTION_LIST_LENGTH_LIMIT),
     [results],

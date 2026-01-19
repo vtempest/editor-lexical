@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {JSX} from 'react';
 
@@ -22,6 +15,7 @@ import {
 import {createPortal} from 'react-dom';
 
 import {focusNearestDescendant, isKeyboardInput} from '../utils/focusUtils';
+import Icon from './Icon';
 
 type DropDownContextType = {
   registerItem: (ref: React.RefObject<null | HTMLButtonElement>) => void;
@@ -272,12 +266,18 @@ export default function DropDown({
         className={buttonClassName}
         onClick={handleOnClick}
         ref={buttonRef}>
-        {buttonIconClassName && <span className={buttonIconClassName} />}
+        {buttonIconClassName && (() => {
+          // Extract icon name from className like "icon block-type paragraph" -> "paragraph"
+          // Skip "icon" and "block-type", take the last meaningful class
+          const classes = buttonIconClassName.replace(/^icon\s+/, '').split(' ').filter(c => c && c !== 'block-type');
+          const iconName = classes[classes.length - 1];
+          return iconName ? <Icon name={iconName} /> : null;
+        })()}
         {buttonIcon}
         {buttonLabel && (
           <span className="text dropdown-button-text">{buttonLabel}</span>
         )}
-        {!hideChevron && <i className="chevron-down" />}
+        {!hideChevron && <Icon name="chevron-down" />}
       </button>
 
       {showDropDown &&

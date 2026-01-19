@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
 import type {LexicalEditor} from 'lexical';
 import type {JSX} from 'react';
@@ -23,6 +16,7 @@ import * as ReactDOM from 'react-dom';
 
 import useModal from '../../hooks/useModal';
 import Button from '../../ui/Button';
+import Icon from '../../ui/Icon';
 import {DialogActions} from '../../ui/Dialog';
 import {INSERT_YOUTUBE_COMMAND} from '../YouTubePlugin';
 
@@ -46,7 +40,7 @@ export const YoutubeEmbedConfig: PlaygroundEmbedConfig = {
   exampleUrl: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
 
   // Icon for display.
-  icon: <i className="icon youtube" />,
+  icon: <Icon name="youtube" />,
 
   insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
     editor.dispatchCommand(INSERT_YOUTUBE_COMMAND, result.id);

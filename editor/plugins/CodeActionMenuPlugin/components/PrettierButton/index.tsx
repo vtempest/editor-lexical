@@ -1,16 +1,11 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 import './index.css';
 
 import {$isCodeNode} from '@lexical/code';
 import {$getNearestNodeFromDOMNode, LexicalEditor} from 'lexical';
 import {Options} from 'prettier';
 import {useState} from 'react';
+
+import Icon from '../../../../ui/Icon';
 
 interface Props {
   lang: string;
@@ -146,9 +141,9 @@ export function PrettierButton({lang, editor, getCodeDOMNode}: Props) {
         onMouseLeave={handleMouseLeave}
         aria-label="prettier">
         {syntaxError ? (
-          <i className="format prettier-error" />
+          <Icon name="prettier-error" />
         ) : (
-          <i className="format prettier" />
+          <Icon name="prettier" />
         )}
       </button>
       {tipsVisible ? (

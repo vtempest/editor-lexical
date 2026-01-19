@@ -40,7 +40,7 @@ i.add-comment {
   height: 20px;
   width: 20px;
   vertical-align: -10px;
-  background-image: url(../../images/icons/chat-left-text.svg);
+  background-image: url(../../icons/editor/chat-left-text.svg);
 }
 
 @media (max-width: 600px) {
@@ -151,7 +151,7 @@ i.comments {
   height: 20px;
   width: 20px;
   vertical-align: -10px;
-  background-image: url(../../images/icons/comments.svg);
+  background-image: url(../../icons/editor/comments.svg);
   transition: opacity 0.2s linear;
 }
 
@@ -228,7 +228,7 @@ i.send {
   height: 20px;
   width: 20px;
   vertical-align: -10px;
-  background-image: url(../../images/icons/send.svg);
+  background-image: url(../../icons/editor/send.svg);
   opacity: 0.5;
   transition: opacity 0.2s linear;
 }
@@ -415,6 +415,6 @@ i.send {
   height: 15px;
   width: 15px;
   vertical-align: -10px;
-  background-image: url(../../images/icons/trash3.svg);
+  background-image: url(../../icons/editor/trash3.svg);
   transition: opacity 0.2s linear;
 }

@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 import {$isCodeNode} from '@lexical/code';
 import {
   $getNearestNodeFromDOMNode,
@@ -15,6 +8,7 @@ import {
 import * as React from 'react';
 import {useState} from 'react';
 
+import Icon from '../../../../ui/Icon';
 import {useDebounce} from '../../utils';
 
 interface Props {
@@ -61,9 +55,9 @@ export function CopyButton({editor, getCodeDOMNode}: Props) {
   return (
     <button className="menu-item" onClick={handleClick} aria-label="copy">
       {isCopyCompleted ? (
-        <i className="format success" />
+        <Icon name="success" />
       ) : (
-        <i className="format copy" />
+        <Icon name="copy" />
       )}
     </button>
   );
